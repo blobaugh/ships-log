@@ -51,7 +51,7 @@ class BLShips {
             'has_archive' => true,
             'query_var' => 'ship',
             'rewrite' => array( 'slug' => 'ship' ),
-            //'menu_icon' => 'fs/path/to/icon',
+            'menu_icon' => SHIPS_LOG_PLUGIN_URL . 'images/ship-icons/aosicon112.png',
             'register_meta_box_cb' => array( &$this, 'registerLogMetabox' )
             
         );
