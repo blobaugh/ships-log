@@ -9,7 +9,6 @@ class BLShips {
     
     public function __construct() {
         
-        if( is_admin() ) {
             
             // Register Ship post type
             add_action( 'init', array( &$this, 'registerShipPostType' ) );
@@ -17,12 +16,91 @@ class BLShips {
             // Save ship info entered in form meta
             add_action( 'save_post', array( &$this, 'saveShipMeta' ) );
             
+            // Setup template for ship
+            add_action( 'template_redirect', array( &$this, 'shipTemplate' ) );
+            
             // Register Ship Log Post Type
             add_action( 'init', array( &$this, 'registerLogPostType' ) );
             
             // Save log info entered in form meta
             add_action( 'save_post', array( &$this, 'saveLogMeta' ) );
+            
+            // Setup template for log
+            add_action( 'template_redirect', array( &$this, 'logTemplate' ) );
+            
+            // Validate ship log before allowing a publish
+            add_action( 'publish_' . $this->mLogPostType, array( &$this, 'validateLogForPublish') );
+       
+    }
+    
+    public function logTemplate() {
+        global $post;
+        
+        if( $this->mLogPostType != $post->post_type )
+            return;
+        
+        if(is_singular( $this->mLogPostType ) ) {
+            $template = "single-$this->mLogPostType.php";
+        } else if( is_post_type_archive( $this->mLogPostType ) ) {
+            $template = "archive-$this->mLogPostType.php";
         }
+        
+       
+        if( '' == locate_template( array( $template ) ) ) {
+            // Template could not be found in child or parent theme
+            $file = SHIPS_LOG_PLUGIN_DIR . "views/$template";
+            require_once( $file );
+        }
+        
+        // Do not continue loading
+        exit();
+    }
+    
+    
+    public function shipTemplate() {
+        global $post;
+        
+        if( $this->mShipPostType != $post->post_type )
+            return;
+        
+        if(is_singular( $this->mShipPostType ) ) {
+            $template = "single-$this->mShipPostType.php";
+        } else if( is_post_type_archive( $this->mShipPostType ) ) {
+            $template = "archive-$this->mShipPostType.php";
+        }
+        
+       
+        if( '' == locate_template( array( $template ) ) ) {
+            // Template could not be found in child or parent theme
+            $file = SHIPS_LOG_PLUGIN_DIR . "views/$template";
+            require_once( $file );
+        }
+        
+        // If I get here then I was unable to find a template. Pass back
+        return;
+    }
+    
+    public function getShips() {
+        $args = array(
+            'post_type' => $this->mShipPostType,
+            'post_status' => 'any'
+        );
+        return get_posts( $args );
+    }
+    
+    /*
+     * http://codex.wordpress.org/Post_Status_Transitions
+     */
+    public function validateLogForPublish( $PostId ) {
+        //die("attempting to publish a log");
+        
+        // Check to see if the log is associated with a ship
+            // If not
+                // Change post status to pending
+        
+                // Show error message to user
+            
+            // If it is associated do nothing so the log publishes
     }
     
     /**
@@ -49,8 +127,8 @@ class BLShips {
             'labels' => $labels,
             'hierarchical' => false,
             'has_archive' => true,
-            'query_var' => 'ship',
-            'rewrite' => array( 'slug' => 'ship' ),
+            'query_var' => 'shiplog',
+            'rewrite' => array( 'slug' => 'ship-log' ),
             'menu_icon' => SHIPS_LOG_PLUGIN_URL . 'images/ship-icons/aosicon112.png',
             'register_meta_box_cb' => array( &$this, 'registerLogMetabox' )
             
@@ -72,6 +150,7 @@ class BLShips {
      */
     public function renderLogMetabox( $Post ) {
         $meta = get_post_custom( $Post->ID );
+        $ships = $this->getShips();
         //echo '<pre>'; var_dump($meta); echo '</pre>';
         require_once( SHIPS_LOG_PLUGIN_DIR . 'views/admin/ship-log-entry.php' );
     }
@@ -82,7 +161,16 @@ class BLShips {
      */
     public function saveLogMeta( $PostId ) {
         
-       
+       // Exit early on autosave because we may not have a post id
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+                return false;
+        
+        if( isset( $_POST['log'] ) ) {
+            $_POST['log'] = stripslashes_deep( $_POST['log'] );
+            foreach( $_POST['log'] AS $k => $v ) {
+                update_post_meta( $PostId, $k, $v );
+            }
+        }
     }
     
     
@@ -115,7 +203,8 @@ class BLShips {
             'rewrite' => array( 'slug' => 'ship' ),
             'show_in_menu' => 'edit.php?post_type=' . $this->mLogPostType,
             //'menu_icon' => 'fs/path/to/icon',
-            'register_meta_box_cb' => array( &$this, 'registerShipMetabox' )
+            'register_meta_box_cb' => array( &$this, 'registerShipMetabox' ),
+          //  'publicly_queryable' => true
             
         );
         

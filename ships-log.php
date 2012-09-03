@@ -26,3 +26,13 @@ require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/bl/bl-includes.php' ); // Required to 
  * **************************************************************************
  */
 require_once( 'lib/Ships.class.php' );
+//
+////add_action( 'transition_post_status', 'test_publish_post', 10, 3 );
+//add_action( 'publish_blshiplog', 'test_publish_post' );//, 10, 3 );
+//
+//function test_publish_post( $post_id ) {
+////    die( var_dump($post_id) );
+////    if( $new_status == 'publish' ) 
+////        die( 'publishing ' );
+//    //die('test_publish_post' );
+//}
