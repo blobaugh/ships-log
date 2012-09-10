@@ -128,7 +128,7 @@ class BLShips {
             'hierarchical' => false,
             'has_archive' => true,
             'query_var' => 'shiplog',
-            'rewrite' => array( 'slug' => 'ship-log' ),
+            'rewrite' => array( 'slug' => 'ship-log', 'with_front' => false ),
             'menu_icon' => SHIPS_LOG_PLUGIN_URL . 'images/ship-icons/aosicon112.png',
             'register_meta_box_cb' => array( &$this, 'registerLogMetabox' )
             
@@ -200,7 +200,7 @@ class BLShips {
             'hierarchical' => false,
             'has_archive' => true,
             'query_var' => 'ship',
-            'rewrite' => array( 'slug' => 'ship' ),
+            'rewrite' => array( 'slug' => 'ship', 'with_front' => false ),
             'show_in_menu' => 'edit.php?post_type=' . $this->mLogPostType,
             //'menu_icon' => 'fs/path/to/icon',
             'register_meta_box_cb' => array( &$this, 'registerShipMetabox' ),
