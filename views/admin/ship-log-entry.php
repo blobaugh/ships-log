@@ -18,7 +18,7 @@
 
 <!-- TRIP PURPOSE -->
  <tr valign="top">
-        <th scope="row"><label for="LogTripPurpose">Ship</label></th>
+        <th scope="row"><label for="LogTripPurpose">Trip Purpose</label></th>
         <td>
             <select id="LogTripPurpose" name="log[TripPurpose]">
                 <option value="Day Sail" <?php selected( "Day Sail", $meta['TripPurpose'][0] ); ?>>Day Sail</option>

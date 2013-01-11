@@ -30,12 +30,27 @@ class BLShips {
             
             // Validate ship log before allowing a publish
             add_action( 'publish_' . $this->mLogPostType, array( &$this, 'validateLogForPublish') );
-       
+            
+            // Add CSS and JS files required for the frontend
+            add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_enqueue' ) );
+      
+    }
+    
+    public function frontend_enqueue() {
+        wp_register_style('ship-log', SHIPS_LOG_PLUGIN_URL.'/css/ship-log.css');
+	wp_enqueue_style('ship-log');
+        
     }
     
     public function logTemplate() {
         global $post;
         
+        $meta = get_post_meta( $post->ID );
+        $ship = get_post( $meta['ShipId'][0] );
+        $ship_meta = get_post_meta( $ship->ID );
+        
+        $meta['ShipName'] = $ship->post_title;;
+                
         if( $this->mLogPostType != $post->post_type )
             return;
         
@@ -60,6 +75,8 @@ class BLShips {
     public function shipTemplate() {
         global $post;
         
+        $meta = get_post_meta( $post->ID );
+                
         if( $this->mShipPostType != $post->post_type )
             return;
         
