@@ -33,5 +33,9 @@ e.g.
 
 == Changelog ==
 
+= 1.1 =
+* Removed reliance on templates, which was broken
+* Updated CSS files to only load when a ship log post is displaying
+
 = 1.0 =
 * Initial release of the plugin
