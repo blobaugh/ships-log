@@ -30,13 +30,13 @@
 </tr>
 
 <!-- ENTRY DATE -->
- <tr valign="top">
+<!-- <tr valign="top">
         <th scope="row"><label for="LogEntryDate">Entry Date</label></th>
         <td>
             <input type="text" id="LogEntryDate" name="log[EntryDate]" value="<?php echo esc_attr( $meta['EntryDate'][0]); ?>"/>
         </td>
 </tr>
-
+-->
 
 <!-- DEPARTURE TIME -->
  <tr valign="top">

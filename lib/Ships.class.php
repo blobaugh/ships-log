@@ -17,7 +17,7 @@ class BLShips {
             add_action( 'save_post', array( &$this, 'saveShipMeta' ) );
             
             // Setup template for ship
-            add_action( 'template_redirect', array( &$this, 'shipTemplate' ) );
+            // DISABLE UNTIL A GOOD FIX IS FOUND add_action( 'template_redirect', array( &$this, 'shipTemplate' ) );
             
             // Register Ship Log Post Type
             add_action( 'init', array( &$this, 'registerLogPostType' ) );
@@ -26,37 +26,19 @@ class BLShips {
             add_action( 'save_post', array( &$this, 'saveLogMeta' ) );
             
             // Setup template for log
-    //        add_action( 'template_redirect', array( &$this, 'logTemplate' ) );
+            //add_action( 'template_redirect', array( &$this, 'logTemplate' ) );
             
             // Validate ship log before allowing a publish
             add_action( 'publish_' . $this->mLogPostType, array( &$this, 'validateLogForPublish') );
             
             // Add CSS and JS files required for the frontend
-            add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_enqueue' ) );
-    
-            // Add ship logs to home/blog page
-            add_action( 'pre_get_posts', array( $this, 'addLogsToHome' ) );
-
-            
-    }
-
-    public function addLogsToHome( $query ) {
-        if ( is_home() && $query->is_main_query() || is_feed() )
-            $query->set( 'post_type', array( 'post', 'page', $this->mLogPostType ) );
-
-        return $query;
+            //add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_enqueue' ) );
+      
     }
     
     public function frontend_enqueue() {
-        global $post;
-
-        if( get_post_type( $post->ID ) != $this->mShipPostType && get_post_type( $post->ID ) != $this->mLogPostType )
-            return;
-
-
         wp_register_style('ship-log', SHIPS_LOG_PLUGIN_URL.'/css/ship-log.css');
-    
-        wp_enqueue_style('ship-log');
+		wp_enqueue_style('ship-log');
         
     }
     

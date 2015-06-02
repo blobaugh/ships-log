@@ -1,0 +1,31 @@
+
+#ships-log-entry { }
+
+#ships-log-entry #ships-log-entry-head {
+    padding: 5px;
+}
+#ships-log-entry .ships-log-meta {
+   font-size: 80%;
+}
+
+#ships-log-entry #ship-info th {
+    padding: 3px;
+    font-weight: bold;
+    width: 100px;
+}
+
+#ships-log-entry #ship-info td {
+    padding: 3px;
+}
+
+#ships-log-entry #ship-info tr:nth-child(odd)    { 
+    background-color:#eee; 
+}
+
+#ships-log-entry #ship-info tr:nth-child(even)    { 
+    background-color:#fff; 
+}
+
+#ships-log-entry .ships-log-td-pad {
+    padding-left: 5px;
+}

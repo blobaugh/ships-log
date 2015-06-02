@@ -3,7 +3,7 @@
 Plugin Name: Ships Log
 Plugin URI: https://github.com/blobaugh/ships-log
 Description: Plugin to add a ship's log capability to WordPress. Create ship profiles and store logs for each trip per ship
-Version: 0.6
+Version: 1.3.3
 Author: Ben Lobaugh
 Author URI: http://ben.lobaugh.net
 License: 
