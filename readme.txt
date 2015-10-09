@@ -2,7 +2,7 @@
 Contributors: blobaugh
 Tags: custom post type, ship log, boat log, management, ship, boat, log
 Requires at least: 3.0
-Tested up to: 4.1
+Tested up to: 4.4
 Stable tag: trunk
 
 Create and store profiles on all your ships/boats along with logs of every outing and adventure
@@ -32,6 +32,9 @@ e.g.
 
 
 == Changelog ==
+
+= 2.0.0 =
+* Metaboxes converted to cmb2
 
 = 1.3.3 =
 * Removed unecessary css file loading on every page

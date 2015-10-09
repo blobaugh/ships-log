@@ -19,12 +19,6 @@ require_once( SHIPS_LOG_PLUGIN_DIR . '3rd-party/cmb2/init.php' );
 
 require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/functions.php' ); // Required to setup bl functionality
 
-
-/*
- * **************************************************************************
- * **************************************************************************
- * ******** YOU MAY BEGIN YOUR CUSTOM PLUGIN CODE BELOW THIS COMMENT ********
- * **************************************************************************
- * **************************************************************************
- */
 require_once( 'lib/Ships.class.php' );
+
+require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/ShipLog.class.php' );

@@ -1,6 +1,6 @@
 <?php
 
-new BLShips();
+$blship = new BLShips();
 class BLShips {
     
     private $mShipPostType = 'blship';
@@ -14,13 +14,13 @@ class BLShips {
             add_action( 'init', array( &$this, 'registerShipPostType' ) );
             
             // Save ship info entered in form meta
-            add_action( 'save_post', array( &$this, 'saveShipMeta' ) );
+            //add_action( 'save_post', array( &$this, 'saveShipMeta' ) );
             
             // Setup template for ship
             // DISABLE UNTIL A GOOD FIX IS FOUND add_action( 'template_redirect', array( &$this, 'shipTemplate' ) );
             
             // Register Ship Log Post Type
-            add_action( 'init', array( &$this, 'registerLogPostType' ) );
+            //add_action( 'init', array( &$this, 'registerLogPostType' ) );
             
             // Save log info entered in form meta
             add_action( 'save_post', array( &$this, 'saveLogMeta' ) );
