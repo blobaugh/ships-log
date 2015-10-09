@@ -15,7 +15,9 @@ define( 'SHIPS_LOG_PLUGIN_DIR', trailingslashit( dirname( __FILE__) ) );
 define( 'SHIPS_LOG_PLUGIN_URL', trailingslashit ( WP_PLUGIN_URL . "/" . basename( __DIR__  ) ) );
 define( 'SHIPS_LOG_PLUGIN_FILE', SHIPS_LOG_PLUGIN_DIR . basename( __DIR__  ) . ".php" );
 
-require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/bl/bl-includes.php' ); // Required to setup bl functionality
+require_once( SHIPS_LOG_PLUGIN_DIR . '3rd-party/cmb2/init.php' );
+
+require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/functions.php' ); // Required to setup bl functionality
 
 
 /*
@@ -26,13 +28,3 @@ require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/bl/bl-includes.php' ); // Required to 
  * **************************************************************************
  */
 require_once( 'lib/Ships.class.php' );
-//
-////add_action( 'transition_post_status', 'test_publish_post', 10, 3 );
-//add_action( 'publish_blshiplog', 'test_publish_post' );//, 10, 3 );
-//
-//function test_publish_post( $post_id ) {
-////    die( var_dump($post_id) );
-////    if( $new_status == 'publish' ) 
-////        die( 'publishing ' );
-//    //die('test_publish_post' );
-//}
