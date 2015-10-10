@@ -102,11 +102,26 @@ class BLShipLog {
 
 		// Guests
 
-		// Departure Time
+		$cmb->add_field( array(
+			'name'			=> __( 'Departure', 'blshiplog' ),
+			'desc'			=> __( 'Date and Time of departure', 'blshiplog' ),
+			'id'			=> 'Departure',
+			'type'			=> 'text_datetime_timestamp',
+		) );
+		
+		$cmb->add_field( array( 
+			'name'			=> __( 'Estimated Arrival', 'blshiplog' ),
+			'desc'			=> __( 'Date and Time of estimated arrival', 'blshiplog' ),
+			'id'			=> 'EstimatedArrival',
+			'type'			=> 'text_datetime_timestamp',
+		) );
 
-		// Estimate arrival time
-
-		// Actual arrival time
+		$cmb->add_field( array(
+			'name'			=> __( 'Actual Arrival', 'blshiplog' ),
+			'desc'			=> __( 'Date and Time of actual arrival, if different than expected', 'blshiplog' ),
+			'id'			=> 'ActualArrival',
+			'type'			=> 'text_datetime_timestamp',
+		) );
 
 		$cmb->add_field( array(
 			'name'			=> __( 'Route', 'blshiplog' ),
