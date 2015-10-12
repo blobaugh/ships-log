@@ -273,4 +273,27 @@ class BLShipLog {
     	}
     	return $post_options;	
 	}
+
+	/**
+	 * Retrieves the logs of a speciic ship
+	 *
+	 * @param integer $ship_id Optional. Defaults to the current post id
+	 * @param array $query_args WP_Query args. For pagination and stuff
+	 * @return array
+	 **/
+	public function getLogs( $ship_id = null, $query_args = array() ) {
+		// Determine the id of the post
+		if( is_null( $ship_id ) ) {
+			$ship_id = get_queried_object_id();
+		}
+
+		$args = wp_parse_args( $query_args, array(
+			'post_type'		=> $this->mPostType,
+			'numberposts'	=> 10,
+			'meta_key'		=> 'ShipId',
+			'meta_value'	=> (int)$ship_id,
+		) );;
+
+		return new WP_Query( $args );
+	}
 } // end class
