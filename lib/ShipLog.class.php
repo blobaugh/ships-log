@@ -37,6 +37,7 @@ class BLShipLog {
 
 		// Add meta box
 		add_action( 'cmb2_init', array( $this, 'cmb2_init' ) );
+		add_action( 'cmb2_render_ships', array( $this, 'cmb2_custom_field_ships' ) );
 
 		// Register the shared taxonomy
 		add_action( 'init', array( $this, 'registerTaxonomy' ) );
@@ -129,13 +130,18 @@ class BLShipLog {
 			'show_names'	=> true,
 		) );
 
-		// Ship
+		$cmb->add_field( array( 
+			'name'			=> __( 'Ship', 'blshiplog' ),
+			'id'			=> 'ShipId',
+			'type'			=> 'select',
+			'options_cb'	=> array( $this, 'shipOptions' ),
+		) );
 
 		$cmb->add_field( array(
 			'name'			=> __( 'Log Purpose', 'blshiplog' ),
 			'id'			=> 'Purpose',
 			'taxonomy'		=> $this->mPurposeTax,
-			'type'			=> 'taxonomy_multicheck',
+			'type'			=> 'taxonomy_radio',
 		) );
 
 		$cmb->add_field( array(
@@ -240,5 +246,31 @@ class BLShipLog {
 			'id'			=> 'WaterUsed',
 			'type'			=> 'text'
 		) );
+	} // end cmb2_init
+
+	public function cmb2_custom_field_ships( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+		
+	}
+
+	/**
+	 * Returns a list of ships as an array to be used by cmb2
+	 *
+	 * @return array
+	 **/
+	public function shipOptions() {
+		$args = array(
+        	'post_type'   => 'blship',
+        	'numberposts' => 10,
+    	);
+
+    	$posts = get_posts( $args );
+
+    	$post_options = array();
+    	if ( $posts ) {
+        	foreach ( $posts as $post ) {
+          	  $post_options[ $post->ID ] = $post->post_title;
+        	}
+    	}
+    	return $post_options;	
 	}
 } // end class
