@@ -41,6 +41,9 @@ class BLShipLog {
 
 		// Register the shared taxonomy
 		add_action( 'init', array( $this, 'registerTaxonomy' ) );
+
+		// Register shortcodes
+		add_action( 'init', array( $this, 'registerShortcodes' ) );
 	}
 
 	/**
@@ -295,5 +298,29 @@ class BLShipLog {
 		) );;
 
 		return new WP_Query( $args );
+	}
+
+	/**
+	 * Adds ship log shortcodes
+	 **/
+	public function registerShortcodes() {
+		add_shortcode( 'ship-logs', array( $this, 'shortcodeShipLogs' ) );
+
+	}
+
+	/**
+	 * Function that builds the ship logs shortcode data
+	 *
+	 * @param array $atts
+	 * @param string $content No used!
+	 * @return string
+	 **/
+	public function shortcodeShipLogs( $atts, $content = '' ) {
+		$ship_id = ( isset( $atts['ship'] ) )? $atts['ship']: null;
+		$posts = $this->getLogs( $ship_id );
+
+		require( SHIPS_LOG_PLUGIN_DIR . 'views/shortcode_ship-logs.php' );
+
+		wp_reset_postdata();
 	}
 } // end class
