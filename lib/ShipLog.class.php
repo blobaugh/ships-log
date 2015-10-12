@@ -11,6 +11,17 @@ class BLShipLog {
 	private $mPostType = 'blshiplog';
 
 	/**
+	 * Taxonomy names
+	 *
+	 * @var string
+	 **/
+	private $mSkipperTax 	= 'blskipper';
+	private $mCrewTax 		= 'blcrew';
+	private $mGuestTax		= 'blguest';
+	private $mPeopleMet		= 'blpeoplemet';
+	private $mPurposeTax	= 'blpurpose';
+
+	/**
 	 * Holds instance of this class
 	 *
 	 * @var BLShipLog
@@ -26,6 +37,9 @@ class BLShipLog {
 
 		// Add meta box
 		add_action( 'cmb2_init', array( $this, 'cmb2_init' ) );
+
+		// Register the shared taxonomy
+		add_action( 'init', array( $this, 'registerTaxonomy' ) );
 	}
 
 	/**
@@ -75,6 +89,33 @@ class BLShipLog {
 
 	}
 
+	public function registerTaxonomy() {
+		$this->_registerTaxonomy( $this->mPurposeTax, 'Log Purpose' );
+		$this->_registerTaxonomy( $this->mSkipperTax, 'Skippers' );
+		$this->_registerTaxonomy( $this->mCrewTax, 'Crew' );
+		$this->_registerTaxonomy( $this->mGuestTax, 'Guests' );
+		$this->_registerTaxonomy( $this->mPeopleMet, 'People Met' );
+	}
+	private function _registerTaxonomy( $taxonomy, $name ) {
+		$object_types = array(
+			$this->mPostType
+		);
+
+		$labels = array(
+			'name'		=> $name,
+		);
+		$args = array(
+			'hierarchical'		=> false,
+			'labels'			=> $labels,
+			'show_ui'			=> true,
+			'show_admin_column'	=> true,
+			'query_var'			=> true,
+			'rewrite'			=> array( 'slug' => 'ship/people' ),
+			'meta_box_cb'		=> false,
+		);
+		register_taxonomy( $taxonomy, $object_types, $args );
+	}
+
 	/**
 	 * Creates the metabox for the ship log via cmb2
 	 **/
@@ -90,17 +131,32 @@ class BLShipLog {
 
 		// Ship
 
-		// Trip Purpose
+		$cmb->add_field( array(
+			'name'			=> __( 'Log Purpose', 'blshiplog' ),
+			'id'			=> 'Purpose',
+			'taxonomy'		=> $this->mPurposeTax,
+			'type'			=> 'taxonomy_multicheck',
+		) );
 
 		$cmb->add_field( array(
 			'name'			=> __( 'Skipper', 'blshiplog' ),
-			'id'			=> 'Skipper',
-			'type'			=> 'text',
+			'id'			=> 'Skipper2',
+			'taxonomy'		=> $this->mSkipperTax,
+			'type'			=> 'taxonomy_multicheck',
+		) );
+		$cmb->add_field( array(
+			'name'			=> __( 'Crew', 'blshiplog' ),
+			'id'			=> 'Crew2',
+			'taxonomy'		=> $this->mCrewTax,
+			'type'			=> 'taxonomy_multicheck',
 		) );
 
-		// Crew
-
-		// Guests
+		$cmb->add_field( array(
+			'name'			=> __( 'Guests', 'blshiplog' ),
+			'id'			=> 'Guests2',
+			'taxonomy'		=> $this->mGuestTax,
+			'type'			=> 'taxonomy_multicheck',
+		) );
 
 		$cmb->add_field( array(
 			'name'			=> __( 'Departure', 'blshiplog' ),
