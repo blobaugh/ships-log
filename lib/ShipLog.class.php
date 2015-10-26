@@ -323,4 +323,19 @@ class BLShipLog {
 
 		wp_reset_postdata();
 	}
+
+	/**
+	 * Magic method
+	 *
+	 * @param string $what
+	 * @return mixed
+	 **/
+	public function __get( $what ) {
+		switch( $what ) {
+			case 'postType':
+				return $this->mPostType;
+				break;
+		}
+		return null;
+	}
 } // end class

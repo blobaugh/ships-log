@@ -23,3 +23,16 @@ require_once( 'lib/Ships.class.php' );
 
 require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/Ship.class.php' );
 require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/ShipLog.class.php' );
+
+function get_ship_from_log() {
+	global $post;
+
+	// Make sure we are on a log page
+	if( BLShipLog::get_instance()->postType != $post->post_type ) { 
+		// Nope, stop here
+		return;
+	}
+
+	$ship = new BL_Ship();
+	return $ship->getShip( $post->ShipId );
+}
