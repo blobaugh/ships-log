@@ -10,7 +10,6 @@ License:
 License URI: 
 Text Domain: ships-log
 */
-define( 'SHIPS_LOG_TEXTDOMAIN', 'ships-log' );
 define( 'SHIPS_LOG_PLUGIN_DIR', trailingslashit( dirname( __FILE__) ) );
 define( 'SHIPS_LOG_PLUGIN_URL', trailingslashit ( WP_PLUGIN_URL . "/" . basename( __DIR__  ) ) );
 define( 'SHIPS_LOG_PLUGIN_FILE', SHIPS_LOG_PLUGIN_DIR . basename( __DIR__  ) . ".php" );
@@ -22,4 +21,5 @@ require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/functions.php' ); // Required to setup
 
 require_once( 'lib/Ships.class.php' );
 
+require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/Ship.class.php' );
 require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/ShipLog.class.php' );
