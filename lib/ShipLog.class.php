@@ -159,7 +159,7 @@ class BLShipLog {
 
 		$cmb->add_field( array(
 			'name'			=> __( 'Location', 'blshiplog' ),
-			'desc'			=> __( 'Place the marker to set the location', 'blshiplog' ),
+			'desc'			=> __( 'Place the marker to set the location or enter exact coordinates below', 'blshiplog' ),
 			'id'			=> 'Location',
 			'type'			=> 'pw_map',
 		) );
