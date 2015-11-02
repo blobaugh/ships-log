@@ -20,6 +20,7 @@ class BLShipLog {
 	private $mGuestTax		= 'blguest';
 	private $mPeopleMet		= 'blpeoplemet';
 	private $mPurposeTax	= 'blpurpose';
+	private $mTrip			= 'bltrip'; // What trip is this entry part of
 
 	/**
 	 * Holds instance of this class
@@ -99,6 +100,7 @@ class BLShipLog {
 		$this->_registerTaxonomy( $this->mCrewTax, 'Crew' );
 		$this->_registerTaxonomy( $this->mGuestTax, 'Guests' );
 		$this->_registerTaxonomy( $this->mPeopleMet, 'People Met' );
+		$this->_registerTaxonomy( $this->mTrip, 'Trip' );
 	}
 	private function _registerTaxonomy( $taxonomy, $name ) {
 		$object_types = array(
@@ -145,6 +147,14 @@ class BLShipLog {
 			'id'			=> 'Purpose',
 			'taxonomy'		=> $this->mPurposeTax,
 			'type'			=> 'taxonomy_radio',
+		) );
+
+		$cmb->add_field( array(
+			'name'			=> __( 'Trip', 'blshiplog' ),
+			'id'			=> 'Trip',
+			'desc'			=> __( 'Trip this entry is part of (Optional)', 'blshiplog' ),
+			'type'			=> 'taxonomy_radio',
+			'taxonomy'		=> $this->mTrip,
 		) );
 
 		$cmb->add_field( array(
