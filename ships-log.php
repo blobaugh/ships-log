@@ -16,6 +16,7 @@ define( 'SHIPS_LOG_PLUGIN_FILE', SHIPS_LOG_PLUGIN_DIR . basename( __DIR__  ) . "
 
 require_once( SHIPS_LOG_PLUGIN_DIR . '3rd-party/class-tgm-plugin-activation.php' );
 require_once( SHIPS_LOG_PLUGIN_DIR . '3rd-party/cmb2/init.php' );
+require_once( SHIPS_LOG_PLUGIN_DIR . '3rd-party/cmb_field_map/cmb-field-map.php' );
 
 require_once( SHIPS_LOG_PLUGIN_DIR . 'lib/functions.php' ); // Required to setup bl functionality
 

@@ -148,6 +148,13 @@ class BLShipLog {
 		) );
 
 		$cmb->add_field( array(
+			'name'			=> __( 'Location', 'blshiplog' ),
+			'desc'			=> __( 'Place the marker to set the location', 'blshiplog' ),
+			'id'			=> 'Location',
+			'type'			=> 'pw_map',
+		) );
+
+		$cmb->add_field( array(
 			'name'			=> __( 'Skipper', 'blshiplog' ),
 			'id'			=> 'Skipper2',
 			'taxonomy'		=> $this->mSkipperTax,
