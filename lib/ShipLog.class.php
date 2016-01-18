@@ -38,7 +38,6 @@ class BLShipLog {
 
 		// Add meta box
 		add_action( 'cmb2_init', array( $this, 'cmb2_init' ) );
-		add_action( 'cmb2_render_ships', array( $this, 'cmb2_custom_field_ships' ) );
 
 		// Register the shared taxonomy
 		add_action( 'init', array( $this, 'registerTaxonomy' ) );
@@ -133,6 +132,20 @@ class BLShipLog {
 			'context'		=> 'normal',
 			'priority'		=> 'high',
 			'show_names'	=> true,
+		) );
+
+		$cmb->add_field( array(
+			'name'			=> 'Tax test',
+			'id'			=> 'taxtTest',
+			'type'			=> 'taxonomy_manage_select',
+			'taxonomy'		=> $this->mSkipperTax,
+		) );
+
+		$cmb->add_field( array(
+			'name'			=> 'T2',
+			'id'			=> 't2',
+			'type'			=> 'taxonomy_manage_select',
+			'taxonomy'		=> $this->mCrewTax,
 		) );
 
 		$cmb->add_field( array( 
@@ -268,9 +281,6 @@ class BLShipLog {
 		) );
 	} // end cmb2_init
 
-	public function cmb2_custom_field_ships( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
-		
-	}
 
 	/**
 	 * Returns a list of ships as an array to be used by cmb2
